@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <title>Spin Wheel App</title>
+  <style>
+    body { text-align:center; font-family:"Khmer OS Battambang", sans-serif; }
+    canvas { margin-top:20px; }
+    #result { font-size:24px; margin-top:20px; color:#333; }
+    button { padding:10px 20px; font-size:18px; }
+  </style>
+</head>
+<body>
+  <h1>រង្វង់សំណួរ</h1>
+  <canvas id="wheel" width="500" height="500"></canvas>
+  <br>
+  <button onclick="spin()">Spin</button>
+  <div id="result"></div>
+
+<script>
+const options = [
+  "កុំផ្លិច","លីមីត","ដេរីវេ","ខ្សែកោង","អាំងតេក្រាល",
+  "ឌីផេរ៉ង់ស្យែល","ប្រូបាប","ធរណីមាត្រក្នុងលំហ","កោនិក","ស្ថិតិ"
+];
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const size = options.length;
+const arc = 2 * Math.PI / size;
+let angle = 0;
+let spinning = false;
+let spinVelocity = 0;
+
+function drawWheel(rotation=0) {
+  ctx.clearRect(0,0,500,500);
+  for(let i=0;i<size;i++){
+    ctx.beginPath();
+    ctx.fillStyle = `hsl(${i*36},70%,60%)`;
+    ctx.moveTo(250,250);
+    ctx.arc(250,250,250,i*arc+rotation,(i+1)*arc+rotation);
+    ctx.fill();
+    ctx.save();
+    ctx.translate(250,250);
+    ctx.rotate(i*arc+arc/2+rotation);
+    ctx.fillStyle="#000";
+    ctx.font="20px Khmer OS Battambang";
+    ctx.fillText(options[i],100,10);
+    ctx.restore();
+  }
+  // Pointer
+  ctx.beginPath();
+  ctx.moveTo(250,250);
+  ctx.lineTo(250,0);
+  ctx.strokeStyle="red";
+  ctx.lineWidth=5;
+  ctx.stroke();
+}
+drawWheel();
+
+function spin(){
+  if(spinning) return;
+  spinning = true;
+  spinVelocity = Math.random()*0.3 + 0.25; // initial speed
+  animate();
+}
+
+function animate(){
+  if(spinVelocity>0.002){
+    angle += spinVelocity;
+    spinVelocity *= 0.98; // friction
+    drawWheel(angle);
+    requestAnimationFrame(animate);
+  } else {
+    spinning=false;
+    const selectedIndex = Math.floor(((size - (angle % (2*Math.PI))/arc)) % size);
+    document.getElementById("result").innerText = "ជម្រើស៖ " + options[selectedIndex];
+  }
+}
+</script>
+</body>
+</html>
