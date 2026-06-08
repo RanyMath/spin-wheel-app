@@ -1,0 +1,59 @@
+Create a complete online mathematics learning website called "Math-AI".
+
+The website must run entirely in a web browser using HTML, CSS, and JavaScript only.
+
+Features:
+
+1. Home Page
+- Modern educational design
+- Khmer and English language support
+- Responsive layout
+- Mathematics-themed background
+
+2. Math Test
+- Multiple-choice questions
+- Automatic scoring
+- Timer
+- Random questions
+- Show correct answers after submission
+
+3. Math Games
+
+A. Spin Wheel
+- 10 math categories
+- Spin animation
+- Random question after spinning
+
+B. Logic Puzzle
+- Number puzzles
+- Pattern puzzles
+- Sudoku-style puzzles
+
+C. Jigsaw Puzzle
+- Mathematics image puzzles
+- Drag and drop pieces
+
+4. Advanced Calculator
+- Scientific calculator
+- Age calculator (birth date to age)
+- Percentage calculator
+- Equation solver
+- Graph calculator
+
+5. Leaderboard
+- Store scores in Local Storage
+- Show top players
+
+6. Dark Mode / Light Mode
+
+7. Modern UI
+- Smooth animations
+- Bootstrap 5
+- Font Awesome icons
+
+Generate complete code files:
+- index.html
+- style.css
+- script.js
+
+All features must work directly in the browser without any server or database.
